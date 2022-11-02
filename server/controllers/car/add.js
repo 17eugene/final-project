@@ -4,8 +4,6 @@ const addCar = async (req, res, next) => {
   try {
     const car = await Car.create(req.body);
 
-    console.log(req.body)
-
     res.status(201).json({
       status: "Successfully added",
       code: 201,
