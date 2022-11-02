@@ -1,0 +1,15 @@
+@import "../variables/variables.scss";
+
+.add-form__title {
+  font-weight: 700;
+  font-size: calc($fontSize + 8px);
+  text-align: center;
+  color: $font-color-primary-light;
+  margin-bottom: 20px;
+}
+
+.form__label {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 100%;
+}

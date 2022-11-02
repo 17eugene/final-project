@@ -1,0 +1,9 @@
+@import "../variables/variables.scss";
+
+.filter-section {
+    flex: 0.30;
+    min-width: 265px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

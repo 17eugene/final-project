@@ -1,0 +1,80 @@
+{
+  "header": {
+    "navigation": {
+      "conditions": "умови",
+      "feedbacks": "відгуки",
+      "contacts": "контакти"
+    },
+    "login": "Вхід"
+  },
+
+  "contactsTextPrimary": "зробіть замовлення",
+  "contactsTextSecondary": "або",
+
+  "filterTitleClass": "Клас авто",
+  "filterTitleBody": "Тип кузова",
+
+  "economy": "економ",
+  "mid-range": "середній",
+  "business": "бізнес",
+  "premium": "преміум",
+
+  "gasoline": "бензин",
+  "diesel": "дізель",
+
+  "manual": "механіка",
+  "automatic": "автомат",
+
+  "sedan": "седан",
+  "hatchback": "хетчбек",
+  "suv": "позашляховик",
+
+  "days": "днів",
+  "day": "дні",
+  "per day": "на добу",
+
+  "book": "Забронювати авто",
+  "add": "Додати нове авто",
+  "addConfirm": "Додати",
+  "submit": "Підтвердити оновлення",
+
+  "deleteCar": "Видалити авто",
+  "updateCar": "Оновити дані про авто",
+
+  "updateProfile": "Налаштування профіля",
+  "signOut": "Вийти",
+
+  "addTitle": "Додати авто",
+
+  "carForm": {
+    "brand": "Назва бренду...",
+    "model": "Назва моделі...",
+    "year": "Рік виробництва...",
+    "engine": "Об'єм двигуна...",
+    "transmission": "Тип трансмісії...",
+    "fuel": "Тип палива...",
+    "class": "Клас авто...",
+    "body": "Тип кузова...",
+    "price": "Ціна за добу...",
+    "image": "Зображення (URL)..."
+  },
+
+  "authForm": {
+    "registrationTitle": "Реєстрація",
+    "loginTitle": "Вхід",
+    "name": "Ім'я",
+    "password": "Пароль",
+    "passwordConfirm": "Підтвердіть пароль",
+    "btnReg": "Створити аккаунт",
+    "btnLog": "Увійти до профіля",
+    "haveAccount": "Вже зареєстровані?",
+    "needAccount": "Потрібен аккаунт?",
+    "registerLink": "Реєстрація"
+  },
+
+  "themeLight": "Світла тема",
+  "themeDark": "Темна тема",
+
+  "notFound": "Сторінку не знайдено",
+  "notFoundCar": "Відповідний автомобіль не знайдено"
+}

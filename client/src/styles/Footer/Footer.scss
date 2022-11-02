@@ -1,0 +1,14 @@
+@import "../variables/variables.scss";
+
+.footer {
+  height: 70px;
+  width: 100%;
+  padding: 15px;
+  box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.2);
+  background-color: $btn-color-primary;
+  margin-top: auto;
+
+  &.dark {
+    background-color: $btn-color-secondary;
+  }
+}

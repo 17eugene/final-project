@@ -1,0 +1,10 @@
+@import "../variables/variables.scss";
+
+.modal {
+    padding: 15px;
+    border-radius: $br;
+    z-index: 1001;
+    background-color: $bg-color-light;
+    box-shadow: 2px 3px 10px rgba(134, 126, 126, 0.7);
+    position: relative;
+}

@@ -1,0 +1,17 @@
+@import "../../styles/variables/variables.scss";
+
+.contacts-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  position: absolute;
+  top: 50px;
+  left: -50px;
+  background-color: $bg-color-light;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  border-radius: $br;
+
+  &.dark {
+    background-color: $bg-popup-color-dark;
+  }
+}
