@@ -12,7 +12,13 @@ const Form = ({ children, onSubmit, variant }: IFormProps) => {
   return (
     <form
       onSubmit={onSubmit}
-      className={variant === "add" ? "form form__add" : "form form__update"}
+      className={
+        variant === "add"
+          ? "form form__add"
+          : variant === "upd"
+          ? "form form__update"
+          : "form"
+      }
     >
       {children}
     </form>

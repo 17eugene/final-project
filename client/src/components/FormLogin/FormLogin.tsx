@@ -45,7 +45,7 @@ const FormLogin = ({ togglePasswordVisibility, visible }: IFormLoginProps) => {
       className={pathname.includes("signup") ? "auth-form" : "auth-form login"}
     >
       <Form onSubmit={loginFormik.handleSubmit}>
-        <h3 className="modal__title">{t("authForm.loginTitle")}</h3>
+        <h3 className="form__title">{t("authForm.loginTitle")}</h3>
 
         <div className="auth-form__input-item">
           <FormInput

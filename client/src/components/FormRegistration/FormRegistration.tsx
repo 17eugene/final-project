@@ -47,7 +47,7 @@ const FormRegistration = ({
   return (
     <div className="auth-form">
       <Form onSubmit={registerFormik.handleSubmit}>
-        <h3 className="modal__title">{t("authForm.registrationTitle")}</h3>
+        <h3 className="form__title">{t("authForm.registrationTitle")}</h3>
         <div className="auth-form__input-item">
           <FormInput
             name="name"
