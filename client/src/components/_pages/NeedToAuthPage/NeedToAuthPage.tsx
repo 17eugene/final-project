@@ -1,5 +1,5 @@
 import { useCallback, MouseEvent } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -12,10 +12,15 @@ import "../../../styles/NeedToAuthPage/NeedToAuthPage.scss";
 const NeedToAuthPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { state } = useLocation();
 
   const clickToClose = useCallback(() => {
-    navigate("/");
-  }, [navigate]);
+    if (!state || !state.from) {
+      navigate("/", { replace: true });
+    } else {
+      navigate(`/${state?.from}`);
+    }
+  }, [navigate, state]);
   return (
     <Backdrop onClick={clickToClose}>
       <Modal onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
