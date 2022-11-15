@@ -14,7 +14,8 @@
   opacity: 0.95;
 
   &.dark {
-    background-color: $bg-popup-color-dark;
+    background-color: $bg-area-color-dark;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 1);
 
     & .edit-menu__text {
       color: $font-color-primary-dark;
