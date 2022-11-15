@@ -1,7 +1,7 @@
 @import "../variables/variables.scss";
 
 .navigation__item {
-  padding: 1.5rem 0.25rem;
+  padding: 1.5rem 0.05rem;
   cursor: pointer;
   color: $font-color-secondary-light;
   font-size: $fontSize;
@@ -32,7 +32,6 @@
   &:nth-of-type(3):before {
     content: "";
     position: absolute;
-    transform: translate(1025%, 70%) rotate(45deg);
     display: inline-block;
     width: 6px;
     height: 6px;
@@ -45,5 +44,45 @@
   &.dark:nth-of-type(3):before {
     border-bottom: 2px solid $font-color-secondary-dark;
     border-right: 2px solid $font-color-secondary-dark;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__item {
+    padding: 1.5rem 1rem;
+    color: $font-color-secondary-light;
+    font-size: calc($fontSize + 2px);
+    font-weight: 700;
+    width: 100%;
+    transition: 0.15s linear;
+
+    &.dark:hover {
+      background-color: $font-color-secondary-light;
+    }
+
+    &:hover {
+      background-color: $font-color-secondary-dark;
+    }
+
+    &::after {
+      content: "";
+      height: 1px;
+      bottom: 0px;
+      left: 0;
+      opacity: 1;
+      transition: 0.25s linear;
+      background: $font-color-secondary-dark;
+    }
+
+    &:nth-of-type(3):before {
+      margin-left: 20px;
+      transform: translate(1025%, 90%) rotate(45deg);
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .navigation__item:nth-of-type(3)::before {
+    transform: translate(1025%, 60%) rotate(45deg);
   }
 }

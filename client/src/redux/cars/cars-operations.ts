@@ -8,6 +8,10 @@ interface ICarId {
   _id: string;
 }
 
+interface ICarError {
+  message: string;
+}
+
 const getAllCars = createAsyncThunk<ICarResponse[], void, { rejectValue: any }>(
   "cars/getAllCars",
   async (_, { rejectWithValue }: any) => {
@@ -20,15 +24,15 @@ const getAllCars = createAsyncThunk<ICarResponse[], void, { rejectValue: any }>(
   }
 );
 
-const addCar = createAsyncThunk<ICarResponse, ICar, { rejectValue: any }>(
+const addCar = createAsyncThunk<ICarResponse, ICar, { rejectValue: ICarError }>(
   "cars/addNewCar",
-  async (credentials, { rejectWithValue }: any) => {
+  async (credentials, { rejectWithValue }) => {
     const car = credentials;
     try {
       const { data } = await axios.post("/car/", car);
       return data.car;
-    } catch (error) {
-      return rejectWithValue(error);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data);
     }
   }
 );

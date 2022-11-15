@@ -45,7 +45,7 @@ const carsSlice = createSlice({
       })
       .addCase(carsOperations.addCar.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error;
+        state.error = action.payload?.message || "";
       })
       .addCase(carsOperations.deleteCar.pending, (state, _) => {
         state.loading = true;
@@ -100,4 +100,5 @@ const carsSlice = createSlice({
 });
 
 export default carsSlice.reducer;
-export const { selectCar, resetToDefaultCar, getDefaultCar } = carsSlice.actions;
+export const { selectCar, resetToDefaultCar, getDefaultCar } =
+  carsSlice.actions;

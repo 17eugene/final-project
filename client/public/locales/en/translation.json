@@ -13,6 +13,7 @@
 
   "filterTitleClass": "Vehicle class",
   "filterTitleBody": "Body type",
+  "filterTitleTransmission": "Transmission type",
 
   "economy": "economy",
   "mid-range": "mid-range",
@@ -41,22 +42,23 @@
   "deleteCar": "Delete the car",
   "updateCar": "Update the vehicle info",
 
+  "orderDetails": "View order",
   "updateProfile": "Update profile",
   "signOut": "Sign out",
 
-  "addTitle": "Add car",
+  "addTitle": "Add a car",
 
   "carForm": {
-    "brand": "Brand name...",
-    "model": "Model name...",
-    "year": "Year of production...",
-    "engine": "Engine displacement...",
-    "transmission": "Type of transmission...",
-    "fuel": "Type of fuel...",
-    "class": "Class...",
-    "body": "Body type...",
-    "price": "Price per day...",
-    "image": "Image URL..."
+    "brand": "Brand name",
+    "model": "Model name",
+    "year": "Year of production",
+    "engine": "Engine displacement",
+    "transmission": "Type of transmission",
+    "fuel": "Type of fuel",
+    "class": "Class",
+    "body": "Body type",
+    "price": "Price per day",
+    "image": "Image URL"
   },
 
   "authForm": {
@@ -76,5 +78,45 @@
   "themeDark": "Switch to dark",
 
   "notFound": "Page not found",
-  "notFoundCar": "No suitable vehicle was found"
+  "notFoundCar": "No suitable vehicle was found",
+
+  "footer": {
+    "address": {
+      "city": "Odesa",
+      "street": "4, Olexander's ave."
+    },
+    "joinUs": "Join us",
+    "additional": {
+      "title": "Additional services",
+      "wedding": "Wedding car",
+      "abroad": "Renting abroad",
+      "withDriver": "Car with driver",
+      "leasing": "Car leasing",
+      "hourly": "Hourly car rental"
+    }
+  },
+
+  "booking": {
+    "title": "Place your order",
+    "emailPlaceholder": "Enter your e-mail address",
+    "from": "From date",
+    "to": "To date",
+    "totalDays": "Total days",
+    "totalPrice": "Total price",
+    "commentTitle": "Add a comment to the order (optional)",
+    "commentPlaceholder": "Type a comment here",
+    "btnSubmit": "Confirm order",
+    "btnCancel": "Cancel",
+
+    "needTo": "Need to",
+    "toBookCar": "to book the car",
+    "btnClose": "Close"
+  },
+
+  "order": {
+    "empty": "You haven't placed any orders yet"
+  },
+
+  "btnDelete": "Delete",
+  "deleteConfirmation": "Are you sure you want to delete the selected car"
 }

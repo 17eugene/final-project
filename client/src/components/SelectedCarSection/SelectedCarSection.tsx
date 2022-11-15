@@ -8,16 +8,15 @@ import CarViewArea from "../CarViewArea/CarViewArea";
 import CarFeaturesArea from "../CarFeaturesArea/CarFeaturesArea";
 import UpdateForm from "../UpdateForm/UpdateForm";
 import Backdrop from "../Backdrop/Backdrop";
+import DeleteConfirmation from "../DeleteConfirmation/DeleteConfirmation";
 
 import "../../styles/SelectedCarSection/SelectedCarSection.scss";
 
-interface ISelectedCarSectionProps {
-  theme: string | null;
-}
-
-const SelectedCarSection = ({ theme }: ISelectedCarSectionProps) => {
+const SelectedCarSection = () => {
   const [isOpenedEdit, setIsOpenedEdit] = useState<boolean>(false);
   const [isOpenedUpdateForm, setIsOpenedUpdateForm] = useState<boolean>(false);
+  const [isOpenedDeleteConfirmation, setIsOpenedDeleteConfirmation] =
+    useState<boolean>(false);
 
   const cars = useAppSelector((state) => state.cars.carsCollection);
   const selectedCar = useAppSelector((state) => state.cars.selectedCar);
@@ -30,6 +29,10 @@ const SelectedCarSection = ({ theme }: ISelectedCarSectionProps) => {
   const toggleEdit = useCallback(() => {
     setIsOpenedEdit(!isOpenedEdit);
   }, [isOpenedEdit]);
+
+  const toggleDeleteConfirmation = useCallback(() => {
+    setIsOpenedDeleteConfirmation(!isOpenedDeleteConfirmation);
+  }, [isOpenedDeleteConfirmation]);
 
   const toggleUpdateForm = useCallback(() => {
     setIsOpenedUpdateForm(!isOpenedUpdateForm);
@@ -53,19 +56,25 @@ const SelectedCarSection = ({ theme }: ISelectedCarSectionProps) => {
               <Backdrop>
                 <div></div>
               </Backdrop>
-              <UpdateForm theme={theme} toggleUpdateForm={toggleUpdateForm} />
+              <UpdateForm toggleUpdateForm={toggleUpdateForm} />
             </>
           ) : (
             <CarFeaturesArea
-              deleteCarHandler={deleteCarHandler}
+              toggleDeleteConfirmation={toggleDeleteConfirmation}
+              // deleteCarHandler={deleteCarHandler}
               toggleEdit={toggleEdit}
               isOpenedEdit={isOpenedEdit}
               selectedCar={selectedCar}
               toggleUpdateForm={toggleUpdateForm}
-              theme={theme}
             />
           )}
         </>
+      )}
+      {isOpenedDeleteConfirmation && (
+        <DeleteConfirmation
+          toggleDeleteConfirmation={toggleDeleteConfirmation}
+          deleteCarHandler={deleteCarHandler}
+        />
       )}
     </div>
   );

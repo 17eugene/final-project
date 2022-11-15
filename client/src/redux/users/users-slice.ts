@@ -13,7 +13,7 @@ interface IUserState {
   token: string | null;
   isLoggedIn: boolean;
   refreshing: boolean;
-  auth_error: null | string | object;
+  auth_error: null | string;
 }
 
 const initialState: IUserState = {
@@ -71,7 +71,8 @@ const authSlice = createSlice({
         state.refreshing = false;
       })
       .addCase(authOperations.login.rejected, (state, action) => {
-        state.auth_error = action.payload.response.data.message;
+        console.log(action.payload?.message);
+        state.auth_error = action.payload?.message || "";
         state.refreshing = false;
         state.isLoggedIn = false;
       })

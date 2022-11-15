@@ -1,21 +1,24 @@
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import CarsElement from "../CarsElement/CarsElement";
 import CarsSlider from "../CarsSlidel/CarsSlider";
 
 import { ICarResponse } from "../../model/car/car";
 
+import ThemeContext from "../../context/context";
+
 import "../../styles/CarsList/CarsList.scss";
 
 interface ICarsListProps {
   cars: ICarResponse[] | undefined;
   onClick: (id: string) => void;
-  theme: string | null;
 }
 
-const CarsList = ({ cars, onClick, theme }: ICarsListProps) => {
+const CarsList = ({ cars, onClick }: ICarsListProps) => {
+  const theme = useContext(ThemeContext);
   const { t } = useTranslation();
   return (
-    <CarsSlider theme={theme}>
+    <CarsSlider>
       {cars?.length ? (
         <ul className="cars-list">
           {cars &&

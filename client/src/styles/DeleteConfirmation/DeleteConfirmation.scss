@@ -1,0 +1,27 @@
+@import "../variables/variables.scss";
+
+.delete-confirmation {
+  padding: 30px 15px 15px 15px;
+  background-color: $bg-color-light;
+
+  &.dark {
+    background-color: $bg-popup-color-dark;
+
+    & .delete-confirmation__title {
+      color: $font-color-primary-dark;
+    }
+  }
+
+  &__title {
+    color: $font-color-primary-light;
+    font-size: calc($fontSize + 6px);
+    margin-bottom: 35px;
+  }
+
+  & .button-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+}

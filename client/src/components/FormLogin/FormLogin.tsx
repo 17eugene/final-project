@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { useFormik } from "formik";
@@ -24,6 +25,8 @@ const FormLogin = ({ togglePasswordVisibility, visible }: IFormLoginProps) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const [loginError, setLoginError] = useState<string>("");
+
   const { t } = useTranslation();
 
   const loginFormik = useFormik({
@@ -35,9 +38,15 @@ const FormLogin = ({ togglePasswordVisibility, visible }: IFormLoginProps) => {
     validationSchema: loginValidationSchema,
 
     onSubmit: (values, { resetForm }) => {
-      dispatch(authOperations.login(values));
-      navigate("/", { replace: true });
-      resetForm();
+      dispatch(authOperations.login(values)).then((response) => {
+        if (response.payload?.message) {
+          setLoginError(response.payload.message);
+        } else {
+          setLoginError("");
+          navigate("/", { replace: true });
+          resetForm();
+        }
+      });
     },
   });
   return (
@@ -46,6 +55,7 @@ const FormLogin = ({ togglePasswordVisibility, visible }: IFormLoginProps) => {
     >
       <Form onSubmit={loginFormik.handleSubmit}>
         <h3 className="form__title">{t("authForm.loginTitle")}</h3>
+        {loginError ? <div className="auth-error">{loginError}</div> : null}
 
         <div className="auth-form__input-item">
           <FormInput

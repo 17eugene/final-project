@@ -11,12 +11,8 @@
   font-size: $fontSize;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
   cursor: pointer;
-  margin-left: auto;
   transition: 0.15s linear;
-
-  .dark {
-    background-color: $btn-color-secondary;
-  }
+  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
 
   &:hover {
     background-color: $btn-color-secondary;
@@ -36,6 +32,11 @@
     align-items: center;
     gap: 5px;
     margin-bottom: 25px;
+    margin-left: auto;
+  }
+
+  &__login {
+    margin-left: auto;
   }
 
   &__book {
@@ -46,8 +47,11 @@
   &__switch {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 3px;
     padding: 0 10px;
     height: 30px;
+    box-shadow: none;
+    font-size: $fontSize;
   }
 }

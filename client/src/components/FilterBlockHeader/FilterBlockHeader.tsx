@@ -1,5 +1,6 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useContext } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import ThemeContext from "../../context/context";
 
 import "../../styles/FilterBlockHeader/FilterBlockHeader.scss";
 
@@ -8,7 +9,6 @@ interface IFilterBlockHeaderProps {
   isOpenedFilter: boolean;
   onClick: (e: MouseEvent<HTMLDivElement>) => void;
   variant?: string;
-  theme: string | null;
 }
 
 const FilterBlockHeader = ({
@@ -16,8 +16,8 @@ const FilterBlockHeader = ({
   isOpenedFilter,
   onClick,
   variant,
-  theme,
 }: IFilterBlockHeaderProps) => {
+  const theme = useContext(ThemeContext);
   return (
     <div
       className={

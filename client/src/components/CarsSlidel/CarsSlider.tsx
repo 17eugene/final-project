@@ -1,14 +1,15 @@
-import { ReactNode, useCallback, MouseEvent, useRef } from "react";
+import { ReactNode, useCallback, MouseEvent, useRef, useContext } from "react";
 import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
+import ThemeContext from "../../context/context";
 
 import "../../styles/CarsSlider/CarsSlider.scss";
 
 interface ICarsSliderProps {
   children: ReactNode | ReactNode[];
-  theme: string | null;
 }
 
-const CarsSlider = ({ children, theme }: ICarsSliderProps) => {
+const CarsSlider = ({ children }: ICarsSliderProps) => {
+  const theme = useContext(ThemeContext);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const handleRightClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
@@ -16,7 +17,7 @@ const CarsSlider = ({ children, theme }: ICarsSliderProps) => {
       e.currentTarget.className.includes("arrow-right") &&
       carouselRef.current !== null
     ) {
-      carouselRef.current.scrollLeft += carouselRef.current.offsetWidth;
+      carouselRef.current.scrollLeft += carouselRef.current.offsetWidth - 10;
       return;
     }
   }, []);
@@ -26,26 +27,31 @@ const CarsSlider = ({ children, theme }: ICarsSliderProps) => {
       e.currentTarget.className.includes("arrow-left") &&
       carouselRef.current !== null
     ) {
-      carouselRef.current.scrollLeft -= carouselRef.current.offsetWidth;
+      carouselRef.current.scrollLeft -= carouselRef.current.offsetWidth - 10;
       return;
     }
   }, []);
 
   return (
     <div className="slider">
-      <div className={
+      <div
+        className={
           theme === "light"
             ? "slider__arrow arrow-left"
             : "slider__arrow arrow-left dark"
-        } onClick={handleLeftClick}>
+        }
+        onClick={handleLeftClick}
+      >
         <SlArrowLeft className="slider__icon" />
       </div>
+
       <div
         className={theme === "light" ? "slider__bar" : "slider__bar dark"}
         ref={carouselRef}
       >
         {children}
       </div>
+
       <div
         className={
           theme === "light"

@@ -1,7 +1,23 @@
 .selected-car-wrapper {
-    max-height: 600px;
+  width: 85%;
+  margin: 0 auto;
+
+  & .view-area {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .selected-car-wrapper {
+    // max-height: 600px;
     width: 100%;
     display: flex;
     flex: 1;
     gap: 15px;
+
+    & .view-area {
+      margin-bottom: 0;
+      max-width: 615px;
+    }
+  }
 }

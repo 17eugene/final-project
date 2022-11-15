@@ -1,16 +1,19 @@
-import { useAppDispatch } from "../../redux/hooks/hooks";
+import { useState, useCallback, useContext } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import authOperations from "../../redux/users/users-operations";
-import { useState, useCallback } from "react";
-import { useAppSelector } from "../../redux/hooks/hooks";
+
 import { ImUser } from "react-icons/im";
+
 import AccountMenu from "../AccountMenu/AccountMenu";
+
+import ThemeContext from "../../context/context";
+
 import "../../styles/Account/Account.scss";
 
-interface IAccountProps {
-  theme: string | null;
-}
 
-const Account = ({ theme }: IAccountProps) => {
+
+const Account = () => {
+  const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
   const [accountMenuIsOpened, setAccountMenuIsOpened] = useState<boolean>(false);
 
@@ -52,7 +55,6 @@ const Account = ({ theme }: IAccountProps) => {
         <AccountMenu
           email={userData.email}
           logoutHandler={logoutHandler}
-          theme={theme}
           closeMenu={closeMenu}
         />
       )}

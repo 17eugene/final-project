@@ -13,10 +13,29 @@
   z-index: 5;
   opacity: 0.95;
 
+  &.dark {
+    background-color: $bg-popup-color-dark;
+
+    & .edit-menu__text {
+      color: $font-color-primary-dark;
+
+      &:first-of-type::after {
+        display: block;
+        content: "";
+        height: 1px;
+        width: 100%;
+        background: $font-color-secondary-dark;
+        position: absolute;
+        bottom: 0px;
+      }
+    }
+  }
+
   &__text {
     transition: 0.15s linear;
     position: relative;
     padding: 7px 5px;
+    color: $font-color-primary-light;
 
     &:hover {
       cursor: pointer;

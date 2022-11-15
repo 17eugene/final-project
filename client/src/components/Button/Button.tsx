@@ -7,6 +7,7 @@ interface IButtonProps {
   variant?: string;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -15,6 +16,7 @@ const Button = ({
   variant,
   onClick,
   children,
+  disabled,
 }: IButtonProps) => {
   return (
     <button
@@ -27,10 +29,13 @@ const Button = ({
           ? "button__book button"
           : variant === "theme"
           ? "button__switch button"
+          : variant === "login"
+          ? "button__login button"
           : "button"
       }
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
       {text}

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks/hooks";
 
@@ -10,15 +10,26 @@ import HeaderSwitchBlock from "../HeaderSwitchBlock/HeaderSwitchBlock";
 import Account from "../Account/Account";
 
 import { useTranslation } from "react-i18next";
+import ThemeContext from "../../context/context";
 
 import "../../styles/Header/Header.scss";
 
 interface IHeaderProps {
-  theme: string | null;
   setTheme: Dispatch<SetStateAction<string | null>>;
+  toggleMobileMenu: () => void;
+  activeSandwich: boolean;
+  toggleContactsSection: () => void;
+  contactsIsOpened: boolean;
 }
 
-const Header = ({ theme, setTheme }: IHeaderProps) => {
+const Header = ({
+  setTheme,
+  toggleMobileMenu,
+  activeSandwich,
+  toggleContactsSection,
+  contactsIsOpened
+}: IHeaderProps) => {
+  const theme = useContext(ThemeContext);
   const isLoggenInStatus = useAppSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
 
@@ -33,16 +44,22 @@ const Header = ({ theme, setTheme }: IHeaderProps) => {
       <Container>
         <div className="header-container">
           <Logo />
-          <Navbar theme={theme} />
-          <HeaderSwitchBlock theme={theme} setTheme={setTheme} />
+          <Navbar
+            toggleMobileMenu={toggleMobileMenu}
+            activeSandwich={activeSandwich}
+            toggleContactsSection={toggleContactsSection}
+            contactsIsOpened={contactsIsOpened}
+          />
+          <HeaderSwitchBlock setTheme={setTheme} />
           {!isLoggenInStatus ? (
             <Button
               onClick={authPageNavigate}
               type="button"
               text={t("header.login")}
+              variant="login"
             />
           ) : (
-            <Account theme={theme} />
+            <Account />
           )}
         </div>
       </Container>

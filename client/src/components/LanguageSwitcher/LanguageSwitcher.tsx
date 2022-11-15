@@ -1,11 +1,10 @@
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import ThemeContext from "../../context/context";
 import "../../styles/LanguageSwitcher/LanguageSwitcher.scss";
 
-interface ILanguageSwitcherProps {
-  theme: string | null;
-}
-
-const LanguageSwitcher = ({ theme }: ILanguageSwitcherProps) => {
+const LanguageSwitcher = () => {
+  const theme = useContext(ThemeContext);
   const { i18n } = useTranslation();
 
   const changeLanguageHandler = (lang: string) => {
@@ -13,7 +12,7 @@ const LanguageSwitcher = ({ theme }: ILanguageSwitcherProps) => {
   };
 
   const currentLanguage = window.localStorage.getItem("i18nextLng");
-  
+
   return (
     <div
       className={

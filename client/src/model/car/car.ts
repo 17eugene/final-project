@@ -7,12 +7,12 @@ export interface ICar {
   transmission: string;
   fuel: string;
   vehicleClass: string;
-  bodyType: string,
+  bodyType: string;
   price: string;
   imageURL: string;
 }
 
-export  interface ICarResponse extends ICar {
-  _id: string
+export interface ICarResponse extends ICar {
+  _id: string;
+  message?: string;
 }
-

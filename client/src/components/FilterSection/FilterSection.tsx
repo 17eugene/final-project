@@ -14,18 +14,15 @@ interface IFilterSectionProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   searchParams: URLSearchParams;
   checkedOptions: string[];
-  theme: string | null;
 }
 
-const FilterSection = ({ onChange, searchParams, theme }: IFilterSectionProps) => {
+const FilterSection = ({ onChange, searchParams }: IFilterSectionProps) => {
   const [isOpenedFilterByClass, setIsOpenedFilterByClass] =
     useState<boolean>(true);
   const [isOpenedFilterByBody, setIsOpenedFilterByBody] =
     useState<boolean>(false);
-  // const [isOpenedFilterByTransmission, setIsOpenedFilterByTransmission] =
-  //   useState<boolean>(false);
-  // const [isOpenedFilterByFuel, setIsOpenedFilterByFuel] =
-  //   useState<boolean>(false);
+  const [isOpenedFilterByTransmission, setIsOpenedFilterByTransmission] =
+    useState<boolean>(false);
 
   const { t } = useTranslation();
 
@@ -50,46 +47,34 @@ const FilterSection = ({ onChange, searchParams, theme }: IFilterSectionProps) =
         return;
       }
 
-      // if (
-      //   e.currentTarget
-      //     .closest(".toggle-icon-wrapper")
-      //     ?.previousSibling?.textContent?.toLowerCase()
-      //     .includes("transmission")
-      // ) {
-      //   setIsOpenedFilterByTransmission(!isOpenedFilterByTransmission);
-      //   return;
-      // }
+      if (
+        e.currentTarget.parentElement?.firstElementChild?.className
+          .toLowerCase()
+          .includes("transmission")
+      ) {
+        setIsOpenedFilterByTransmission(!isOpenedFilterByTransmission);
+        return;
+      }
 
-      // if (
-      //   e.currentTarget
-      //     .closest(".toggle-icon-wrapper")
-      //     ?.previousSibling?.textContent?.toLowerCase()
-      //     .includes("fuel")
-      // ) {
-      //   setIsOpenedFilterByFuel(!isOpenedFilterByFuel);
-      //   return;
-      // }
     },
     [
       isOpenedFilterByClass,
-      // isOpenedFilterByTransmission,
-      // isOpenedFilterByFuel,
+      isOpenedFilterByTransmission,
       isOpenedFilterByBody,
     ]
   );
 
   return (
     <div className="filter-section">
-      <FilterBlock theme={theme}>
+      <FilterBlock>
         <FilterBlockHeader
           text={t("filterTitleClass")}
           onClick={toggleFilterMenu}
           isOpenedFilter={isOpenedFilterByClass}
           variant="class"
-          theme={theme}
         />
         {isOpenedFilterByClass && (
-          <FilterBlockBody theme={theme}>
+          <FilterBlockBody>
             {filterData.classType.map((type) => (
               <FilterElement
                 key={type.id}
@@ -102,16 +87,15 @@ const FilterSection = ({ onChange, searchParams, theme }: IFilterSectionProps) =
         )}
       </FilterBlock>
 
-      <FilterBlock theme={theme}>
+      <FilterBlock>
         <FilterBlockHeader
           text={t("filterTitleBody")}
           onClick={toggleFilterMenu}
           isOpenedFilter={isOpenedFilterByBody}
           variant="body"
-          theme={theme}
         />
         {isOpenedFilterByBody && (
-          <FilterBlockBody theme={theme}>
+          <FilterBlockBody>
             {filterData.bodyType.map((type) => (
               <FilterElement
                 key={type.id}
@@ -124,11 +108,12 @@ const FilterSection = ({ onChange, searchParams, theme }: IFilterSectionProps) =
         )}
       </FilterBlock>
 
-      {/* <FilterBlock>
+      <FilterBlock>
           <FilterBlockHeader
-            text="Transmission type"
+            text={t("filterTitleTransmission")}
             onClick={toggleFilterMenu}
             isOpenedFilter={isOpenedFilterByTransmission}
+            variant="transmission"
           />
           {isOpenedFilterByTransmission && (
             <FilterBlockBody>
@@ -142,27 +127,7 @@ const FilterSection = ({ onChange, searchParams, theme }: IFilterSectionProps) =
               ))}
             </FilterBlockBody>
           )}
-        </FilterBlock> */}
-
-      {/* <FilterBlock>
-          <FilterBlockHeader
-            text="Fuel type"
-            onClick={toggleFilterMenu}
-            isOpenedFilter={isOpenedFilterByFuel}
-          />
-          {isOpenedFilterByFuel && (
-            <FilterBlockBody>
-              {filterData.fuelType.map((type) => (
-                <FilterElement
-                  key={type.id}
-                  type={type}
-                  onChange={onChange}
-                  checked={searchParams.has(type.value)}
-                />
-              ))}
-            </FilterBlockBody>
-          )}
-        </FilterBlock> */}
+        </FilterBlock>
     </div>
   );
 };

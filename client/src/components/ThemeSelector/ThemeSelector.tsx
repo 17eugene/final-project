@@ -1,18 +1,26 @@
-import { useEffect, useCallback, Dispatch, SetStateAction } from "react";
+import {
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+  useContext,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import Button from "../Button/Button";
+
+import ThemeContext from "../../context/context";
 
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 
 import "../../styles/ThemeSelector/ThemeSelector.scss";
 
 interface IThemeSelectorProps {
-  theme: string | null;
   setTheme: Dispatch<SetStateAction<string | null>>;
 }
 
-const ThemeSelector = ({ theme, setTheme }: IThemeSelectorProps) => {
+const ThemeSelector = ({ setTheme }: IThemeSelectorProps) => {
+  const theme = useContext(ThemeContext);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -46,9 +54,9 @@ const ThemeSelector = ({ theme, setTheme }: IThemeSelectorProps) => {
       >
         <div className="theme-icon">
           {theme === "light" ? (
-            <BsFillMoonFill size={18} />
+            <BsFillMoonFill size={17} />
           ) : (
-            <BsSun size={18} />
+            <BsSun size={17} />
           )}
         </div>
       </Button>

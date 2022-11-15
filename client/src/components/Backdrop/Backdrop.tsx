@@ -3,10 +3,11 @@ import "../../styles/Backdrop/Backdrop.scss";
 
 interface IBackdropProps {
   children: ReactNode | ReactNode[];
+  onClick?: () => void;
 }
 
-const Backdrop = ({ children }: IBackdropProps) => {
-  return <div className="backdrop">{children}</div>;
+const Backdrop = ({ children, onClick }: IBackdropProps) => {
+  return <div className="backdrop" onClick={onClick}>{children}</div>;
 };
 
 export default Backdrop;

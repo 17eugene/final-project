@@ -3,8 +3,8 @@
 .car-features {
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.7);
   border-radius: $br;
-  flex: 0.25;
-  min-width: 220px;
+  width: 100%;
+  min-width: 230px;
   padding: 20px 15px;
   height: 360px;
   background-color: rgba(206, 228, 249, 1);
@@ -32,7 +32,7 @@
   &__specifications {
     text-transform: capitalize;
     text-align: center;
-    font-size: 12px;
+    font-size: $fontSize;
     margin-bottom: 15px;
 
     &.dark {
@@ -41,12 +41,12 @@
   }
 
   &__class {
-    font-size: calc($fontSize - 2px);
+    font-size: $fontSize;
     text-transform: lowercase;
     text-align: center;
     margin: 0 auto;
     padding: 4px 8px;
-    width: 40%;
+    width: fit-content;
     background-color: $btn-color-primary;
     border-radius: calc($br + 4px);
     font-weight: 700;
@@ -114,7 +114,6 @@
   padding: 2px;
   border-radius: 4px;
   transition: 0.15s linear;
-  z-index: 4;
 
   &.dark {
     fill: $font-color-primary-dark;
@@ -131,4 +130,31 @@
 
 .disabled-settings {
   display: none;
+}
+
+@media screen and (min-width: 769px) {
+  .car-features {
+    flex: 0.3;
+
+    &__specifications {
+      font-size: 12px;
+    }
+
+    &__class {
+      font-size: calc($fontSize - 2px);
+      width: 40%;
+    }
+  }
+
+  .price__days {
+    font-size: calc($fontSize - 2px);
+  }
+
+  .price__price {
+    font-size: calc($fontSize + 2px);
+  }
+
+  .price__price span {
+    font-size: calc($fontSize - 2px);
+  }
 }

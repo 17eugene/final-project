@@ -1,20 +1,26 @@
+import { useContext } from "react";
+import { useTranslation } from "react-i18next";
+
 import NavbarItem from "../NavbarItem/NavbarItem";
 import Contacts from "../Contacts/Contacts";
-import { useTranslation } from "react-i18next";
+
+import ThemeContext from "../../context/context";
+
 import "../../styles/NavbarList/NavbarList.scss";
 import "../../styles/NavbarItem/NavbarItem.scss";
 
 interface INavbarList {
   toggleContactsSection: () => void;
-  contactsIsOpened: boolean;
-  theme: string | null;
+  contactsIsOpened?: boolean;
+  variant?: string
 }
 
 const NavbarList = ({
   toggleContactsSection,
   contactsIsOpened,
-  theme,
+  variant
 }: INavbarList) => {
+  const theme = useContext(ThemeContext);
   const { t } = useTranslation();
   return (
     <>
@@ -40,7 +46,7 @@ const NavbarList = ({
           onClick={toggleContactsSection}
         >
           <NavbarItem menuItem={t("header.navigation.contacts")} />
-          {contactsIsOpened && <Contacts theme={theme} />}
+          {contactsIsOpened && <Contacts toggleContactsSection={toggleContactsSection}/>}
         </li>
       </ul>
     </>

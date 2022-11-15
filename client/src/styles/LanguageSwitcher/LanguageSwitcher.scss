@@ -2,13 +2,14 @@
 
 .language-switcher {
   font-size: calc($fontSize + 2px);
-  padding: 15px;
+  padding: 1.5rem 0.75rem;
   position: relative;
   display: inline-block;
-  margin-left: auto;
+  flex: 0.25;
 
   &__current-language {
     text-transform: uppercase;
+    font-weight: 400;
   }
 
   &:hover .tooltip {
@@ -67,6 +68,23 @@
     &:hover {
       text-decoration: underline;
       color: $font-color-secondary-light;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .language-switcher {
+    display: flex;
+    justify-content: center;
+
+    &::after {
+      transform: translate(300%, 80%) rotate(45deg);
+    }
+
+    &:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+      transform: translate(0px, 30px);
     }
   }
 }

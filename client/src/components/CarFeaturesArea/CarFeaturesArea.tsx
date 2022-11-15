@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useAppSelector } from "../../redux/hooks/hooks";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../Button/Button";
 import EditMenu from "../EditMenu/EditMenu";
 
@@ -7,37 +9,39 @@ import { ICarResponse } from "../../model/car/car";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { BsThreeDots } from "react-icons/bs";
 
+import ThemeContext from "../../context/context";
+
 import { useTranslation } from "react-i18next";
 import "../../styles/CarFeaturesArea/CarFeaturesArea.scss";
 
 interface ICarFeaturesArea {
-  deleteCarHandler: () => void;
   toggleEdit: () => void;
   isOpenedEdit: boolean;
   selectedCar: ICarResponse;
   toggleUpdateForm: () => void;
-  theme: string | null;
+  toggleDeleteConfirmation: () => void;
 }
 
 const CarFeaturesArea = ({
-  deleteCarHandler,
   toggleEdit,
   isOpenedEdit,
   selectedCar,
   toggleUpdateForm,
-  theme,
+  toggleDeleteConfirmation,
 }: ICarFeaturesArea) => {
+  const theme = useContext(ThemeContext);
   const userRole = useAppSelector((state) => state.auth.user.role);
-
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const { t } = useTranslation();
+  const location = useLocation();
+
   return (
     <div className={theme === "light" ? "car-features" : "car-features dark"}>
       {isOpenedEdit && (
         <EditMenu
           onClick={toggleEdit}
-          deleteCarHandler={deleteCarHandler}
           toggleUpdateForm={toggleUpdateForm}
-          theme={theme}
+          toggleDeleteConfirmation={toggleDeleteConfirmation}
         />
       )}
       {userRole === "ADMIN" && (
@@ -92,7 +96,7 @@ const CarFeaturesArea = ({
 
       {/* price */}
       <div className="car-features__price">
-        <ul className={theme === "light"?"price__list":"price__list dark"}>
+        <ul className={theme === "light" ? "price__list" : "price__list dark"}>
           <li className="price__item">
             <p className="price__days">1-3 {t("day")}</p>
             <span className="price__price">
@@ -129,7 +133,12 @@ const CarFeaturesArea = ({
           </li>
         </ul>
       </div>
-      <Button type="button" text={t("book")} variant="book" />
+      <Link
+        to={isLoggedIn ? "booking" : "booking/needAuthorization"}
+        state={{ from: location?.search }}
+      >
+        <Button type="button" text={t("book")} variant="book" />
+      </Link>
     </div>
     // </div>
   );

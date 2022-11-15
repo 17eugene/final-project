@@ -9,6 +9,10 @@ interface IUserLogin {
   password: string;
 }
 
+interface ILoginError {
+  message: string;
+}
+
 const token = {
   setToken(token: string) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -24,7 +28,7 @@ const register = createAsyncThunk<IUserResponse, IUser, { rejectValue: any }>(
   async (credentials, { rejectWithValue }: any) => {
     try {
       const { data } = await axios.post("/auth/signup", credentials);
-      token.setToken(data.userData.token)
+      token.setToken(data.userData.token);
       return data.userData;
     } catch (error) {
       return rejectWithValue(error);
@@ -32,18 +36,19 @@ const register = createAsyncThunk<IUserResponse, IUser, { rejectValue: any }>(
   }
 );
 
-const login = createAsyncThunk<IUserResponse, IUserLogin, { rejectValue: any }>(
-  "auth/login",
-  async (credentials, { rejectWithValue }: any) => {
-    try {
-      const { data } = await axios.post("/auth/signin", credentials);
-      token.setToken(data.data.token);
-      return data.data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+const login = createAsyncThunk<
+  IUserResponse,
+  IUserLogin,
+  { rejectValue: ILoginError }
+>("auth/login", async (credentials, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.post("/auth/signin", credentials);
+    token.setToken(data.data.token);
+    return data.data;
+  } catch (error: any) {
+    return rejectWithValue(error.response?.data);
   }
-);
+});
 
 const logout = createAsyncThunk<null, undefined, { rejectValue: any }>(
   "auth/logout",
@@ -66,7 +71,7 @@ const getCurrent = createAsyncThunk<
   const persistedToken = state.auth.token;
 
   if (!persistedToken) {
-    return thunkAPI.rejectWithValue("User not authorized!")
+    return thunkAPI.rejectWithValue("User not authorized!");
   }
 
   token.setToken(persistedToken);

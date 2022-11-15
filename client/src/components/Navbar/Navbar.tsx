@@ -1,25 +1,36 @@
-import { useState } from "react";
 import NavbarList from "../NavbarList/NavbarList";
+import MobileMenuIcon from "../MobileMenuIcon/MobileMenuIcon";
 import "../../styles/Navbar/Navbar.scss";
 
 interface INavbarProps {
-  theme: string | null
+  toggleMobileMenu: () => void;
+  activeSandwich: boolean;
+  toggleContactsSection: () => void;
+  contactsIsOpened: boolean;
 }
 
-const Navbar = ({theme}: INavbarProps) => {
-  const [contactsIsOpened, setContactsIsOpened] = useState(false);
+const Navbar = ({
+  toggleMobileMenu,
+  activeSandwich,
+  toggleContactsSection,
+  contactsIsOpened,
+}: INavbarProps) => {
 
-  const toggleContactsSection = () => {
-    setContactsIsOpened(!contactsIsOpened);
-  };
   return (
-    <nav className="navigation">
-      <NavbarList
-        toggleContactsSection={toggleContactsSection}
-        contactsIsOpened={contactsIsOpened}
-        theme={theme}
-      />
-    </nav>
+    <>
+      <div>
+        <MobileMenuIcon
+          toggleMobileMenu={toggleMobileMenu}
+          activeSandwich={activeSandwich}
+        />
+      </div>
+      <nav className="navigation">
+        <NavbarList
+          toggleContactsSection={toggleContactsSection}
+          contactsIsOpened={contactsIsOpened}
+        />
+      </nav>
+    </>
   );
 };
 

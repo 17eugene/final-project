@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const { carRoutes, userRoutes } = require("./routes");
+const { carRoutes, userRoutes, orderRoutes } = require("./routes");
 
 const app = express();
 const PORT = process.env.PORT || 2221;
@@ -14,6 +14,8 @@ app.use(cors());
 
 app.use("/api/auth", userRoutes);
 app.use("/api/car", carRoutes);
+app.use("/api/order", orderRoutes);
+
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found!" });

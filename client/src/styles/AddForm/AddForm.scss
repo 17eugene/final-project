@@ -1,5 +1,9 @@
 @import "../variables/variables.scss";
 
+.add-form-wrapper {
+  padding: 15px;
+}
+
 .add-form__title {
   font-weight: 700;
   font-size: calc($fontSize + 8px);
@@ -12,4 +16,13 @@
   display: inline-block;
   margin-bottom: 10px;
   width: 100%;
+}
+
+.add-error {
+  margin-bottom: 15px;
+  text-align: center;
+  padding: 10px 0;
+  background-color: rgba(252, 103, 103, 0.546);
+  border-radius: $br;
+  text-transform: uppercase;
 }

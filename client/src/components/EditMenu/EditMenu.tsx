@@ -1,26 +1,27 @@
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "../CloseIcon/CloseIcon";
+import ThemeContext from "../../context/context";
 
 import "../../styles/EditMenu/EditMenu.scss";
 
 interface IEditMenuProps {
   onClick: () => void;
-  deleteCarHandler: () => void;
   toggleUpdateForm: () => void;
-  theme: string | null;
+  toggleDeleteConfirmation: () => void;
 }
 
 const EditMenu = ({
   onClick,
-  deleteCarHandler,
   toggleUpdateForm,
-  theme,
+  toggleDeleteConfirmation,
 }: IEditMenuProps) => {
+  const theme = useContext(ThemeContext);
   const { t } = useTranslation();
   return (
-    <div className="edit-menu">
-      <CloseIcon theme={theme} onClick={onClick} />
-      <p className="edit-menu__text" onClick={deleteCarHandler}>
+    <div className={theme === "light" ? "edit-menu" : "edit-menu dark"}>
+      <CloseIcon onClick={onClick} />
+      <p className="edit-menu__text" onClick={toggleDeleteConfirmation}>
         {t("deleteCar")}
       </p>
       <p className="edit-menu__text" onClick={toggleUpdateForm}>
