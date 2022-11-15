@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 
 import { useFormik } from "formik";
@@ -13,6 +14,7 @@ import CloseIcon from "../CloseIcon/CloseIcon";
 
 import carsOperations from "../../redux/cars/cars-operations";
 
+import ThemeContext from "../../context/context";
 import { filterData } from "../../filterData";
 
 import { t } from "i18next";
@@ -24,6 +26,7 @@ interface IUpdateFormProps {
 }
 
 const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
   const selectedCar = useAppSelector((state) => state.cars.selectedCar);
   const updateFormik = useFormik({
@@ -50,7 +53,11 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
   });
   return (
     <Modal>
-      <div className="update-form-wrapper">
+      <div
+        className={
+          theme === "light" ? "update-form-wrapper" : "update-form-wrapper dark"
+        }
+      >
         <CloseIcon onClick={toggleUpdateForm} />
         <Form onSubmit={updateFormik.handleSubmit} variant="upd">
           <label className="form__label">
