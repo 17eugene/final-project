@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState, lazy } from "react";
 
-import { useAppDispatch, useAppSelector } from "./redux/hooks/hooks";
+import { useAppDispatch } from "./redux/hooks/hooks";
 import { Routes, Route } from "react-router-dom";
 import authOperations from "./redux/users/users-operations";
 
@@ -29,7 +29,6 @@ const App = () => {
     fetchCurrentUser();
   }, [fetchCurrentUser]);
 
-  const token = useAppSelector((state) => state.auth.token);
   return (
     <ThemeContext.Provider value={theme}>
       <Routes>
@@ -39,7 +38,7 @@ const App = () => {
             <Route
               path="booking"
               element={
-                <PrivateRoute token={token}>
+                <PrivateRoute>
                   <OrderPage />
                 </PrivateRoute>
               }
