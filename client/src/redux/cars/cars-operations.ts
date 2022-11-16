@@ -37,19 +37,24 @@ const addCar = createAsyncThunk<ICarResponse, ICar, { rejectValue: ICarError }>(
   }
 );
 
-const deleteCar = createAsyncThunk<ICarResponse, ICarId, { rejectValue: any }>(
-  "cars/deleteCar",
-  async ({ _id }, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.delete(`/car/${_id}`);
-      return data.car;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+const deleteCar = createAsyncThunk<
+  ICarResponse,
+  ICarId,
+  { rejectValue: ICarError }
+>("cars/deleteCar", async ({ _id }, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.delete(`/car/${_id}`);
+    return data.car;
+  } catch (error: any) {
+    return rejectWithValue(error.response?.data);
   }
-);
+});
 
-const updateCar = createAsyncThunk<ICarResponse, ICar, { rejectValue: any }>(
+const updateCar = createAsyncThunk<
+  ICarResponse,
+  ICar,
+  { rejectValue: ICarError }
+>(
   "cars/updateCar",
   async (
     {
@@ -65,7 +70,7 @@ const updateCar = createAsyncThunk<ICarResponse, ICar, { rejectValue: any }>(
       vehicleClass,
       imageURL,
     },
-    { rejectWithValue }: any
+    { rejectWithValue }
   ) => {
     const car = {
       brand,
@@ -82,8 +87,8 @@ const updateCar = createAsyncThunk<ICarResponse, ICar, { rejectValue: any }>(
     try {
       const { data } = await axios.put(`/car/${id}`, car);
       return data.car;
-    } catch (error) {
-      return rejectWithValue(error);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data);
     }
   }
 );
