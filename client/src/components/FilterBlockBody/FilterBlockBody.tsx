@@ -1,8 +1,6 @@
-import { useContext } from "react";
+import { useContext, ReactNode } from "react";
 import ThemeContext from "../../context/context";
 import "../../styles/FilterBlockBody/FilterBlockBody.scss";
-
-import { ReactNode } from "react";
 
 interface IFilterBlockBodyProps {
   children: ReactNode | ReactNode[];
@@ -10,6 +8,7 @@ interface IFilterBlockBodyProps {
 
 const FilterBlockBody = ({ children }: IFilterBlockBodyProps) => {
   const theme = useContext(ThemeContext);
+
   return (
     <div
       className={
