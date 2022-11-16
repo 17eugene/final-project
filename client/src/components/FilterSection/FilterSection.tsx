@@ -17,6 +17,7 @@ interface IFilterSectionProps {
 }
 
 const FilterSection = ({ onChange, searchParams }: IFilterSectionProps) => {
+
   const [isOpenedFilterByClass, setIsOpenedFilterByClass] =
     useState<boolean>(true);
   const [isOpenedFilterByBody, setIsOpenedFilterByBody] =
@@ -42,7 +43,6 @@ const FilterSection = ({ onChange, searchParams }: IFilterSectionProps) => {
           .toLowerCase()
           .includes("body")
       ) {
-        console.log();
         setIsOpenedFilterByBody(!isOpenedFilterByBody);
         return;
       }
