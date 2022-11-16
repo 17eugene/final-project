@@ -6,7 +6,7 @@ const Loader = () => {
   return (
     <div className="loader">
       <ThreeDots
-        height="80"
+        height="60"
         width="80"
         radius="9"
         color="#4fa94d"
