@@ -8,13 +8,20 @@ import { persistor, store } from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
 import "./utils/i18next";
 import Loader from "./components/Loader/Loader";
+import Backdrop from "./components/Backdrop/Backdrop";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<Loader />}>
+    <Suspense
+      fallback={
+        <Backdrop>
+          <Loader />
+        </Backdrop>
+      }
+    >
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <BrowserRouter>
