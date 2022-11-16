@@ -23,7 +23,7 @@ const MainPage = () => {
   const [backdrop, setBackdrop] = useState(false);
   const [checkedOptions, setCheckedOptions] = useState<string[]>([]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({});
 
   const cars = useAppSelector((state) => state.cars.carsCollection);
   const userRole = useAppSelector((state) => state.auth.user.role);
