@@ -8,6 +8,7 @@ import Layout from "./components/Layout/Layout";
 import OrderPage from "./components/_pages/OrderPage/OrderPage";
 import NeedToAuthPage from "./components/_pages/NeedToAuthPage/NeedToAuthPage";
 import PrivateRoute from "./hok/PrivateRoute/PrivateRoute";
+import PublicRoute from "./hok/PublicRoute/PublicRoute";
 
 import ThemeContext from "./context/context";
 
@@ -43,14 +44,36 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
             <Route
               path="booking/needAuthorization"
-              element={<NeedToAuthPage />}
+              element={
+                <PublicRoute restricted>
+                  <NeedToAuthPage />
+                </PublicRoute>
+              }
             />
           </Route>
         </Route>
-        <Route path="signup" element={<AuthPage />} />
-        <Route path="signin" element={<AuthPage />} />
+
+        <Route
+          path="signup"
+          element={
+            <PublicRoute restricted>
+              <AuthPage />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="signin"
+          element={
+            <PublicRoute restricted>
+              <AuthPage />
+            </PublicRoute>
+          }
+        />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </ThemeContext.Provider>
