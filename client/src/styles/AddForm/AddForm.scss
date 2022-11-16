@@ -2,6 +2,27 @@
 
 .add-form-wrapper {
   padding: 15px;
+  background-color: $bg-color-light;
+
+  &.dark {
+    background-color: $bg-area-color-dark;
+
+    & .add-form__title {
+      color: $font-color-primary-dark;
+    }
+
+    & .form__input,
+    & .form__select {
+      background-color: $font-color-secondary-light;
+      border: 2px solid rgb(103, 102, 102);
+      color: $font-color-primary-dark;
+    }
+
+    & .form__input::placeholder,
+    & .form__select::placeholder {
+      color: $font-color-secondary-dark;
+    }
+  }
 }
 
 .add-form__title {
