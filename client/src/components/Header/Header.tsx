@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import ThemeContext from "../../context/context";
 
 import "../../styles/Header/Header.scss";
+import Loader from "../Loader/Loader";
 
 interface IHeaderProps {
   setTheme: Dispatch<SetStateAction<string | null>>;
@@ -27,10 +28,11 @@ const Header = ({
   toggleMobileMenu,
   activeSandwich,
   toggleContactsSection,
-  contactsIsOpened
+  contactsIsOpened,
 }: IHeaderProps) => {
   const theme = useContext(ThemeContext);
   const isLoggenInStatus = useAppSelector((state) => state.auth.isLoggedIn);
+  const isRefreshing = useAppSelector((state) => state.auth.refreshing);
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -51,15 +53,21 @@ const Header = ({
             contactsIsOpened={contactsIsOpened}
           />
           <HeaderSwitchBlock setTheme={setTheme} />
-          {!isLoggenInStatus ? (
-            <Button
-              onClick={authPageNavigate}
-              type="button"
-              text={t("header.login")}
-              variant="login"
-            />
+          {isRefreshing ? (
+            <Loader />
           ) : (
-            <Account />
+            <>
+              {!isLoggenInStatus ? (
+                <Button
+                  onClick={authPageNavigate}
+                  type="button"
+                  text={t("header.login")}
+                  variant="login"
+                />
+              ) : (
+                <Account />
+              )}
+            </>
           )}
         </div>
       </Container>
