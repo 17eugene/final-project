@@ -26,10 +26,10 @@ const getUserOrders = createAsyncThunk<
   IOrderResponse[],
   void,
   { rejectValue: IOrderError }
->("orders/getUserOrders", async (_, { rejectWithValue }: any) => {
+>("orders/getUserOrders", async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.get("/order");
-    return data.orders
+    return data.orders;
   } catch (error: any) {
     return rejectWithValue(error.response?.data);
   }
