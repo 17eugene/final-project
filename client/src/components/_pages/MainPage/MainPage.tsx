@@ -14,7 +14,6 @@ import Container from "../../Container/Container";
 import AddForm from "../../AddForm/AddForm";
 import SelectedCarSection from "../../SelectedCarSection/SelectedCarSection";
 import FilterSection from "../../FilterSection/FilterSection";
-import Loader from "../../Loader/Loader";
 
 import { MdAdd } from "react-icons/md";
 
@@ -28,7 +27,6 @@ const MainPage = () => {
 
   const cars = useAppSelector((state) => state.cars.carsCollection);
   const userRole = useAppSelector((state) => state.auth.user.role);
-  const isLoading = useAppSelector((state) => state.cars.loading);
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
@@ -210,21 +208,17 @@ const MainPage = () => {
               <MdAdd size={16} />
             </Button>
           )}
-          {!isLoading ? (
-            <>
-              <CarsList cars={filterCars} onClick={selectCarHandler} />
-              <section className="section">
-                <FilterSection
-                  onChange={handleChange}
-                  searchParams={searchParams}
-                  checkedOptions={checkedOptions}
-                />
-                <SelectedCarSection />
-              </section>
-            </>
-          ) : (
-            <Loader />
-          )}
+          <>
+            <CarsList cars={filterCars} onClick={selectCarHandler} />
+            <section className="section">
+              <FilterSection
+                onChange={handleChange}
+                searchParams={searchParams}
+                checkedOptions={checkedOptions}
+              />
+              <SelectedCarSection />
+            </section>
+          </>
         </Container>
         <Outlet />
       </main>
