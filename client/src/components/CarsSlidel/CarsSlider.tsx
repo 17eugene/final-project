@@ -1,4 +1,6 @@
 import { ReactNode, useCallback, MouseEvent, useRef, useContext } from "react";
+import { useAppSelector } from "../../redux/hooks/hooks";
+import Loader from "../Loader/Loader";
 import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
 import ThemeContext from "../../context/context";
 
@@ -11,6 +13,7 @@ interface ICarsSliderProps {
 const CarsSlider = ({ children }: ICarsSliderProps) => {
   const theme = useContext(ThemeContext);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const isRefreshing = useAppSelector((state) => state.auth.refreshing);
 
   const handleRightClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
     if (
@@ -49,7 +52,7 @@ const CarsSlider = ({ children }: ICarsSliderProps) => {
         className={theme === "light" ? "slider__bar" : "slider__bar dark"}
         ref={carouselRef}
       >
-        {children}
+        {isRefreshing ? <Loader /> : children}
       </div>
 
       <div
