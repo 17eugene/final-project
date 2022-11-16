@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks/hooks";
+import { useState, useContext } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 
 import { useFormik } from "formik";
 
@@ -10,12 +10,14 @@ import FormInput from "../FormInput/FormInput";
 import FormSelect from "../FormSelect/FormSelect";
 import Button from "../Button/Button";
 import FormError from "../FormError/FormError";
+import Loader from "../Loader/Loader";
 
 import { modalValidationSchema } from "../../utils/modalValidationSchema";
 import carsOperations from "../../redux/cars/cars-operations";
 import { ICar } from "../../model/car/car";
 
 import { useTranslation } from "react-i18next";
+import ThemeContext from "../../context/context";
 import { filterData } from "../../filterData";
 
 import "../../styles/AddForm/AddForm.scss";
@@ -25,8 +27,10 @@ interface IAddFormProps {
 }
 
 const AddForm = ({ toggleBackdrop }: IAddFormProps) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const isLoading = useAppSelector((state) => state.cars.loading);
 
   const [addCarError, setAddCarError] = useState<string>("");
 
@@ -49,7 +53,7 @@ const AddForm = ({ toggleBackdrop }: IAddFormProps) => {
     onSubmit: (values, { resetForm }) => {
       dispatch(carsOperations.addCar(values)).then((response) => {
         if (response.payload?.message) {
-          setAddCarError(response.payload.message);
+          setAddCarError("Error occured!");
         } else {
           setAddCarError("");
           resetForm();
@@ -60,7 +64,11 @@ const AddForm = ({ toggleBackdrop }: IAddFormProps) => {
 
   return (
     <Modal>
-      <div className="add-form-wrapper">
+      <div
+        className={
+          theme === "light" ? "add-form-wrapper" : "add-form-wrapper dark"
+        }
+      >
         <h3 className="add-form__title">{t("addTitle")}</h3>
         {addCarError ? <div className="add-error">{addCarError}</div> : null}
         <CloseIcon onClick={toggleBackdrop} />
@@ -196,7 +204,11 @@ const AddForm = ({ toggleBackdrop }: IAddFormProps) => {
               <FormError errorText={addFormik.errors.imageURL} />
             )}
           </label>
-          <Button type="submit" text={t("addConfirm")} variant="form" />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Button type="submit" text={t("addConfirm")} variant="form" />
+          )}
         </Form>
       </div>
     </Modal>
