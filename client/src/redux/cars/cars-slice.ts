@@ -61,7 +61,7 @@ const carsSlice = createSlice({
       })
       .addCase(carsOperations.deleteCar.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload?.message || "";
       })
       .addCase(carsOperations.updateCar.pending, (state, _) => {
         state.loading = true;
@@ -77,7 +77,7 @@ const carsSlice = createSlice({
       })
       .addCase(carsOperations.updateCar.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload?.message || "";
       });
   },
   reducers: {
