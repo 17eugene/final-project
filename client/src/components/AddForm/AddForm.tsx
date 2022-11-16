@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 
 import { useFormik } from "formik";
@@ -33,6 +33,14 @@ const AddForm = ({ toggleBackdrop }: IAddFormProps) => {
   const isLoading = useAppSelector((state) => state.cars.loading);
 
   const [addCarError, setAddCarError] = useState<string>("");
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const addFormik = useFormik<ICar>({
     initialValues: {
@@ -81,6 +89,7 @@ const AddForm = ({ toggleBackdrop }: IAddFormProps) => {
               value={addFormik.values.brand}
               onChange={addFormik.handleChange}
               onBlur={addFormik.handleBlur}
+              ref={inputRef}
             />
             {addFormik.errors.brand && addFormik.touched.brand && (
               <FormError errorText={addFormik.errors.brand} />

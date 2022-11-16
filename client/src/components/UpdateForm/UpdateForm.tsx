@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 
 import { useFormik } from "formik";
@@ -33,6 +33,24 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
   const selectedCar = useAppSelector((state) => state.cars.selectedCar);
   const isLoading = useAppSelector((state) => state.cars.loading);
 
+  const updFormRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (updFormRef.current) {
+      updFormRef.current.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   const updateFormik = useFormik({
     initialValues: {
       id: selectedCar?._id || "",
@@ -64,6 +82,7 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
   return (
     <Modal>
       <div
+        ref={updFormRef}
         className={
           theme === "light" ? "update-form-wrapper" : "update-form-wrapper dark"
         }
@@ -79,6 +98,7 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
               value={updateFormik.values.brand}
               onChange={updateFormik.handleChange}
               onBlur={updateFormik.handleBlur}
+              ref={inputRef}
             />
             {updateFormik.errors.brand && updateFormik.touched.brand && (
               <FormError errorText={updateFormik.errors.brand} />

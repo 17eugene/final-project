@@ -1,3 +1,4 @@
+import {useRef, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { useFormik } from "formik";
@@ -26,6 +27,14 @@ const FormRegistration = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if(inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [])
 
   const registerFormik = useFormik({
     initialValues: {
@@ -57,6 +66,7 @@ const FormRegistration = ({
             onChange={registerFormik.handleChange}
             onBlur={registerFormik.handleBlur}
             variant="authorization"
+            ref={inputRef}
           />
           <label className="auth-form__input-label">{t("authForm.name")}</label>
           {registerFormik.errors.name && registerFormik.touched.name && (

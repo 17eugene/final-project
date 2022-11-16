@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { useFormik } from "formik";
@@ -27,7 +27,15 @@ const FormLogin = ({ togglePasswordVisibility, visible }: IFormLoginProps) => {
 
   const [loginError, setLoginError] = useState<string>("");
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const loginFormik = useFormik({
     initialValues: {
@@ -66,6 +74,7 @@ const FormLogin = ({ togglePasswordVisibility, visible }: IFormLoginProps) => {
             onChange={loginFormik.handleChange}
             onBlur={loginFormik.handleBlur}
             variant="authorization"
+            ref={inputRef}
           />
           <label className="auth-form__input-label">E-mail</label>
           {loginFormik.errors.email && loginFormik.touched.email && (
