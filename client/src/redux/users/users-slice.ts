@@ -71,7 +71,6 @@ const authSlice = createSlice({
         state.refreshing = false;
       })
       .addCase(authOperations.login.rejected, (state, action) => {
-        console.log(action.payload?.message);
         state.auth_error = action.payload?.message || "";
         state.refreshing = false;
         state.isLoggedIn = false;
