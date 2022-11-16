@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 
 import { useFormik } from "formik";
@@ -20,15 +20,19 @@ import { filterData } from "../../filterData";
 import { t } from "i18next";
 
 import "../../styles/UpdateForm/UpdateForm.scss";
+import Loader from "../Loader/Loader";
 
 interface IUpdateFormProps {
   toggleUpdateForm: () => void;
 }
 
 const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
+  const [updError, setUpdError] = useState<string>("");
   const theme = useContext(ThemeContext);
   const dispatch = useAppDispatch();
   const selectedCar = useAppSelector((state) => state.cars.selectedCar);
+  const isLoading = useAppSelector((state) => state.cars.loading);
+
   const updateFormik = useFormik({
     initialValues: {
       id: selectedCar?._id || "",
@@ -47,8 +51,14 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
     validationSchema: modalValidationSchema,
 
     onSubmit: (values) => {
-      dispatch(carsOperations.updateCar(values));
-      toggleUpdateForm();
+      dispatch(carsOperations.updateCar(values)).then((response) => {
+        if (response.payload?.message) {
+          setUpdError("Error occured!");
+        } else {
+          setUpdError("");
+          toggleUpdateForm();
+        }
+      });
     },
   });
   return (
@@ -60,6 +70,7 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
       >
         <CloseIcon onClick={toggleUpdateForm} />
         <Form onSubmit={updateFormik.handleSubmit} variant="upd">
+          {updError && <div className="car-form-error">{updError}</div>}
           <label className="form__label">
             <span className="form__label-sign">{t("carForm.brand")}</span>
             <FormInput
@@ -204,7 +215,11 @@ const UpdateForm = ({ toggleUpdateForm }: IUpdateFormProps) => {
               <FormError errorText={updateFormik.errors.imageURL} />
             )}
           </label>
-          <Button type="submit" text={t("submit")} variant="form" />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Button type="submit" text={t("submit")} variant="form" />
+          )}
         </Form>
       </div>
     </Modal>
