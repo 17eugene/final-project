@@ -12,7 +12,6 @@ interface IFormInputProps {
   readonly?: boolean;
   disabled?: boolean;
   maxLength?: number;
-  // ref?: RefObject<HTMLInputElement> | null;
 }
 
 const FormInput = forwardRef(
